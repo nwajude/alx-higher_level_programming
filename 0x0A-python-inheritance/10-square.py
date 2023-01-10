@@ -1,20 +1,34 @@
 #!/usr/bin/python3
-"""
-more class base
+"""Module: 10-square
+This is a class Square that inherits from Rectangle class as the base class
 """
 
 
 Rectangle = __import__('9-rectangle').Rectangle
 
 
-"""
-Square class
-"""
-
-
 class Square(Rectangle):
-    """ Square Class """
+    """This is a rectangle class
+    It has the following private attribute:
+        size = size
+    It inherits the integer validator from the Rectangle class
+    """
+
     def __init__(self, size):
-        """ instantiation with size """
+        """Validates the following attributes:
+            - size
+        """
+
+        self.integer_validator("size", size)
+        super().__init__(size, size)
         self.__size = size
-        super().__init__(self.__size, self.__size)
+
+    def __str__(self):
+        """Returns a super() string of the attribute size"""
+
+        return super().__str__()
+
+    def area(self):
+        """Returns the area of the attribute size"""
+
+        return self.__size **2
