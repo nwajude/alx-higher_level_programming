@@ -1,44 +1,29 @@
 #!/usr/bin/python3
-"""Module: 9-student
-This is a class Student that defines a student by:
-- First_name
-- Last_name
-- Age
-"""
+"""Defines a class Student."""
 
 
 class Student:
-    """Class that defines a student.
-    Public attributes:
-        - first_name
-        - last_name
-        - age
-    Public method to_json().
-    """
+    """Represent a student."""
 
     def __init__(self, first_name, last_name, age):
-        """It accept and assign value to the argument of student class
+        """Initialize a new Student.
         Args:
-            - first_name
-            - last_name
-            - age
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
         """
-
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
-    
+
     def to_json(self, attrs=None):
-        """It retrieves a dictionary representation of a Student instance
+        """Get a dictionary representation of the Student.
+        If attrs is a list of strings, represents only those attributes
+        included in the list.
         Args:
-            - attrs: This is the list of the attribute
-            Returns: the dict representation of the instance.
+            attrs (list): (Optional) The attributes to represent.
         """
-        
-        my_dict = dict()
-        if type(attrs) is list and all(type(x) is str for x in attrs):
-            for x in attrs:
-                if x in self.__dict__:
-                    my_dict.update({x: self.__dict__[x]})
-            return my_dict
-        return self.__dict__.copy()
+        if (type(attrs) == list and
+                all(type(ele) == str for ele in attrs)):
+            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
+        return self.__dict__
